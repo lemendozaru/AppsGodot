@@ -1,0 +1,8 @@
+# Calculadora
+
+## Configurando el proyecto
+
+Será algo bastante sencillo. Nos dirigimos a *Proyecto -> Configuración del proyecto* y en la sección *Visualización -> Ventana* cambiamos el ancho a `720` y el alto a `1280`.
+
+Luego importamos las dos fuentes provistas en la carpeta `Fuentes` a nuestro proyecto recién creado y listo. Es todo lo que tenemos que hacer para preparar nuestro proyecto.
+
