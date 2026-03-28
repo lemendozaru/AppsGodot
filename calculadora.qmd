@@ -10,23 +10,36 @@ Luego importamos las dos fuentes provistas en la carpeta `Fuentes` a nuestro pro
 
 Comenzaremos creando la capa principal o el fondo en el que se irán colocando todos los demás elementos de nuestra aplicación. Lo primero a agregar es un nodo `Control` que renombraremos como `Calculadora`. Enseguida lo anclamos de forma "Completa" y le añadimos un `Panel`, al cual llamaremos `Fondo`. A este también le aplicamos un ancla "Completa".
 
-El siguiente punto es agregar un contenedor que nos permitirá controlar mejor la ubicación de los subsecuentes elementos. Añadimos a `Calculadora` un `VBoxContainer`, le anclamos a pantalla completa y luego le agregamos un `MarginContainer`. Para este último abrimos sus *Ajustes de tamaño para los hijos de un nodo* (es un botón que se encuentra en lugar del anclaje para otros nodos), ahí cambiamos su alineación vertical a "Fin de la reducción" y activamos *Expandir* en el apartado *Vertical*; enseguida le incluimos un `Label`. Esta etiqueta es la que contendrá la salida de la calculadora, por lo que debemos asegurarnos de colocarla correctamente. Para ello ajustamos su *Horizontal Alignment* a `Right`. En su campo escribimos una cifra cualquiera. En este caso, se puso "1234567890".
+El siguiente punto es agregar un contenedor que nos permitirá controlar mejor la ubicación de los subsecuentes elementos. Añadimos a `Calculadora` un `VBoxContainer` (lo dejamos como `VBox`), le anclamos a pantalla completa y luego le agregamos un `MarginContainer` (le diremos `Margen`). Para este último abrimos sus *Ajustes de tamaño para los hijos de un nodo* (es un botón que se encuentra en lugar del anclaje para otros nodos), ahí cambiamos su alineación vertical a "Fin de la reducción" y activamos *Expandir* en el apartado *Vertical*; enseguida le incluimos un `Label`. Esta etiqueta es la que contendrá la salida de la calculadora, por lo que debemos asegurarnos de colocarla correctamente. Para ello ajustamos su *Horizontal Alignment* a `Right`. En su campo escribimos una cifra cualquiera. En este caso, se puso "1234567890".
 
 ## Los botones
 
-Seleccionaremos el `VBoxContainer` y le agregamos un `PanelContainer`. A este en *Vertical* le activaremos "Expandir" en sus *Ajustes de tamaño*, para que ocupe todo lo que le sea posible (en este momento será la mitad inferior). Luego, en su propiedad *Control -> Layout -> Container Sizing -> Stretch Ratio* ponemos `2.0`.
+Seleccionaremos el `VBox` y le agregamos un `PanelContainer` que llamaremos `Panel`. A este en *Vertical* le activaremos "Expandir" en sus *Ajustes de tamaño*, para que ocupe todo lo que le sea posible (en este momento será la mitad inferior). Luego, en su propiedad *Control -> Layout -> Container Sizing -> Stretch Ratio* ponemos `2.0`.
 
-A este `PanelContainer` le añadiremos un `GridContainer`. En este cambiamos *Columns* a `4`. Enseguida le agregamos el primer botón. En su *Text* escribimos "C" y en sus *Ajustes de tamaño* expandimos tanto horizontal como verticalmente. Ocupará una cuarta parte de la sección inferior de nuestra aplicación. Le renombramos a `BotonC` y lo duplicamos tres veces. Cambiamos el nombre y el texto de estos para que coincidan con su operación o valor: `BotonMas` para "+/-", `BotonPorcentaje` para "%" y `BotonDivision` para "/".
+A este `PanelContainer` le añadiremos un `GridContainer` que renombramos `Rejilla`. En este cambiamos *Columns* a `4`. Enseguida le agregamos el primer botón. En su *Text* escribimos "C" y en sus *Ajustes de tamaño* expandimos tanto horizontal como verticalmente. Ocupará una cuarta parte de la sección inferior de nuestra aplicación. Le renombramos a `BotonC` y lo duplicamos tres veces. Cambiamos el nombre y el texto de estos para que coincidan con su operación o valor: `BotonMas` para "+/-", `BotonPorcentaje` para "%" y `BotonDivision` para "/".
 
 Repetiremos el proceso para completar todos los botones necesarios, cuyo orden se sugiere así: "7", "8", "9" y "x"; "4", "5", "6" y "-"; "1", "2", "3" y "+".
 
 ### El Cero
 
-Nos está faltando solo un número que es muy importante y por ello lo colocaremos de manera diferente. Para esto, agregamos un nodo `Control` junto a los demás botones. Le cambiamos en nombre a `Espaciador` y en sus ajustes de tamaño lo expandimos en ambos sentidos. Debe "desocupar" todo la sección inferior de nuestra "botonera". Lo duplicamos y renombramos al nuevo como "ContenedorCero". Con este seleccionado, agregamos un `Button` al que llamaremos `Button0`. A este botón le anclamos de manera "Completa" y luego, en el inspector, vamos a *Control -> Layout -> Anchors Preset* y cambiamos a `Personalizado`. Se desplegarán más opciones. Cambiamos *Anchors Offset Left* a `-180` px.
+Nos está faltando solo un número que es muy importante y por ello lo colocaremos de manera diferente. Para esto, agregamos un nodo `Control` junto a los demás botones. Le cambiamos en nombre a `Espaciador` y en sus ajustes de tamaño lo expandimos en ambos sentidos. Debe "desocupar" todo la sección inferior de nuestra "botonera". Lo duplicamos y renombramos al nuevo como `Contenedor0`. Con este seleccionado, agregamos un `Button` al que llamaremos `Boton0`. A este botón le anclamos de manera "Completa" y luego, en el inspector, vamos a *Control -> Layout -> Anchors Preset* y cambiamos a `Personalizado`. Se desplegarán más opciones. Cambiamos *Anchors Offset Left* a `-180` px.
 
 ### Botones de "punto" e "igual"
 
-Para los botones faltantes toca duplicar cualquiera que no sea el `Button0` y lo arrastramos debajo y afuera del `ContenedorCero`. Le llamamos `BotonPunto` y ponemos en su *Tex* ".". Lo duplicamos y renombramos a `BotonIgual` para poner en su texto "=". Listo, hemos terminado la interfaz gráfica de nuestra calculadora.
+Para los botones faltantes toca duplicar cualquiera que no sea el `Button0` y lo arrastramos debajo y afuera del `Contenedor0`. Le llamamos `BotonPunto` y ponemos en su *Tex* ".". Lo duplicamos y renombramos a `BotonIgual` para poner en su texto "=".
+
+### Volviendo responsiva la interfaz
+
+Para permitir que nuestra aplicación sea responsiva, es necesario ajustar el margen del botón del cero cuando la ventana sea redimensionada.
+
+Agregamos un programa al nodo `Calculadora` y conectamos la señal `resized()` del `Boton0` a `Calculadora` mismo. Entonces completamos la función recién aparecida:
+
+```gdscript
+func _on_boton_0_resized() -> void:
+	@warning_ignore("integer_division")
+	$VBox/Panel/Rejilla/Contenedor0/Boton0.offset_left = -get_window().size.x / 4
+```
+
 
 
 
