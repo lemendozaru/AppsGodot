@@ -1,0 +1,3 @@
+# Optimizando las apps
+
+Remitirse a [Popcar's Blog](popcar.bearblog.dev)

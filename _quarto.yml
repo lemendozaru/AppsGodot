@@ -8,6 +8,7 @@ book:
     - index.qmd
     - intro.qmd
     - calculadora.qmd
+    - optimizaciones.qmd
     - references.qmd
 
 bibliography: references.bib
